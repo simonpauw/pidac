@@ -1,0 +1,1128 @@
+\documentclass[10pt,a5paper]{report}
+\usepackage[a5paper,margin=1.5cm]{geometry}
+\usepackage[dutch]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{framed}
+
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection.}{1em}{}
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{PIDAC Practicumhandleiding \\ \Large (Datarepresentaties, Tools en Technieken)}
+\author{}
+\date{}
+
+\begin{document}
+
+\section*{PIDAC Practicumhandleiding\\\large (Datarepresentaties, Tools en Technieken)}
+\noindent{\rule{\textwidth}{.5pt}}
+\vspace{1cm}  % Optional spacing after the title
+
+\section*{PIDAC Practicumregels}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\textwidth]{./images/warning.png}
+\end{figure}
+
+\textbf{Wees voorzichtig met het gebruik van de PIDAC-modules.} Deze modules worden niet meer geproduceerd en de losse onderdelen zijn vaak niet meer verkrijgbaar. Reparatie is meestal niet mogelijk. Houd je daarom aan de volgende regels:
+
+\begin{itemize}
+    \item Pak een module direct uit de doos en plaats hem meteen op het experimenteerbord. Laat hem niet rondslingeren.
+    \item Let erop dat je de pinnen aan de achterkant niet buigt of breekt bij het plaatsen.
+    \item Leg modules die je niet meer nodig hebt terug in de doos. \textbf{Laat ze niet rondslingeren.}
+    \item Trek stroomdraadjes eruit bij de stekker en niet aan de draad zelf.
+\end{itemize}
+
+
+\chapter*{Week 1}
+\newpage
+
+\section*{Deel 1. Schakelingen en notaties}
+
+Je hebt maar een beperkt aantal logische poorten nodig om elke mogelijke schakeling te kunnen bouwen. Het doel van dit deel is om vertrouwd te raken met deze poorten en de manieren waarop we hiermee schakelingen kunnen bouwen. Je leert ook hoe je schakelingen symbolisch kunt beschrijven.
+
+Voor dit practicum krijg je een antwoordformulier waarop je al je antwoorden kunt invullen.
+
+
+
+\section*{Logische poorten}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{./images/2nand.jpg}
+\caption*{PIDAC-module met 8 NAND-poorten}
+\end{figure}
+
+De NAND-poort heeft het volgende gedrag: op de uitgang staat 5 volt, tenzij beide ingangen 5 volt ontvangen. Dan staat er 0 volt op de uitgang. Je kunt dit zelf testen met een woordgever en een indicator.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.315\textwidth]{./images/woordgever.jpg}
+\hspace{0.05\textwidth}
+\includegraphics[width=0.3\textwidth]{./images/indicatoren.jpg}
+\caption*{Links: Woordgever. Rechts: Indicator.}
+\end{figure}
+
+\begin{framed}
+\textbf{Opdracht 1.1}
+
+\textbf{Lees de practicumregels goed door voordat je begint.}
+
+Nodig: NAND-module, woordgevermodule, indicatormodule en drie draadjes. 
+
+Bouw de schakeling en test of de beschrijving van de NAND-poort klopt.
+\end{framed} 
+
+\section*{Eentjes en nulletjes}
+
+Computers werken met eentjes en nulletjes. Elke poort kan in twee toestanden zijn: 5 volt (hoog, ofwel 1) of 0 volt (laag, ofwel 0).
+
+Niet alle digitale schakelingen werken op 5 volt; sommige gebruiken bijvoorbeeld 3,3 volt als hoog. Maar ongeacht het voltage zijn er altijd twee toestanden.
+
+Het gedrag van een logische poort wordt beschreven met een waarheidstabel. Voor een NAND-poort met ingangen $y$ en $z$ en uitgang $Q$:
+
+\[
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\end{array}
+\]
+
+De symbolische notatie van een NAND-poort:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\textwidth]{./images/NAND.png}
+\end{figure}
+
+Alternatief symbool:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\textwidth]{./images/dist_NAND.png}
+\end{figure}
+
+Complexere schakelingen kunnen worden opgebouwd door poorten met elkaar te verbinden:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/opdracht1_2.png}
+\end{figure}
+
+\begin{framed}
+\textbf{Opdracht 1.2}
+
+Nodig: twee NAND-poorten, een woordgever, een indicator en vijf draadjes. Bouw de schakeling en vul de waarheidstabel op het antwoordblad in.
+\end{framed}
+
+\newpage
+
+\section*{Veelvoorkomende poorten}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|>{\centering\arraybackslash}m{2cm}|>{\vspace{3pt}\centering\arraybackslash}m{2cm}|>{\vspace{4pt}\centering\arraybackslash}m{2cm}|>{\vspace{3pt}\centering\arraybackslash}m{2.2cm}|}
+\hline
+Poort & Rechthoekige notatie & Alternatieve notatie & Waarheidstabel \\
+\hline
+AND & \includegraphics[width=0.15\textwidth]{./images/AND.png} & \includegraphics[width=0.15\textwidth]{./images/dist_AND.png} &
+\raisebox{0.8\height}{$
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 1 \\
+\end{array}$}\\
+\hline
+OR & \includegraphics[width=0.15\textwidth]{./images/OR.png} & \includegraphics[width=0.15\textwidth]{./images/dist_OR.png} &
+\raisebox{0.8\height}{$
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 1 \\
+\end{array}
+$} \\
+\hline
+XOR & \includegraphics[width=0.15\textwidth]{./images/XOR.png} & \includegraphics[width=0.15\textwidth]{./images/dist_XOR.png} &
+\raisebox{0.8\height}{$
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\end{array}
+$} \\
+\hline
+Inverter & \includegraphics[width=0.15\textwidth]{./images/Inverter.png} & \includegraphics[width=0.15\textwidth]{./images/dist_inverter.png} &
+\raisebox{0.7\height}{$
+\begin{array}{c|c}
+y & Q \\
+\hline
+ 0 & 1 \\
+ 1 & 0 \\
+\end{array}
+$} \\
+\hline
+NAND & \includegraphics[width=0.15\textwidth]{./images/NAND.png} & \includegraphics[width=0.15\textwidth]{./images/dist_NAND.png} & 
+\raisebox{0.8\height}{$
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\end{array}
+$} \\
+\hline
+NOR & \includegraphics[width=0.15\textwidth]{./images/NOR.png} &\includegraphics[width=0.15\textwidth]{./images/dist_NOR.png}&
+\raisebox{0.8\height}{$
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+\end{array}
+$} \\
+
+\hline
+\end{tabular}
+\caption*{Overzicht van veelvoorkomende logische poorten}
+\end{table}
+
+\section*{Meerdere ingangen}
+
+De bovenstaande poorten hebben allemaal twee ingangen (behalve de inverter), maar in principe kunnen dat er ook meer zijn. Het PIDAC-systeem bevat bijvoorbeeld ook NAND-poorten met vier ingangen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{./images/4nand.jpg}
+\caption*{NAND-module met vier ingangen}
+\end{figure}
+
+De schematische weergave en waarheidstabel van een NAND-poort met vier ingangen ziet er zo uit:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|>{\vspace{4pt}\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{3cm}|}
+\hline
+Symbool & Waarheidstabel \\
+\hline
+\raisebox{-1\height}{\includegraphics[width=0.2\textwidth]{./images/NAND4.png}} & \small
+$
+\begin{array}{cccc|c}
+w & x & y & z & Q \\
+\hline
+0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 & 1 \\
+0 & 1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 & 1 \\
+0 & 1 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 1 & 1 \\
+1 & 0 & 1 & 0 & 1 \\
+1 & 0 & 1 & 1 & 1 \\
+1 & 1 & 0 & 0 & 1 \\
+1 & 1 & 0 & 1 & 1 \\
+1 & 1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 1 & 0 \\
+\end{array}
+$\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{framed}
+\textbf{Opdracht 1.3}
+
+Nodig: een module met NAND-poorten met vier ingangen, een woordgevermodule, een indicatormodule en vijf draadjes.
+
+Experimenteer met de NAND-poort. Ga na of de bovenstaande tabel klopt. Wat gebeurt er als een ingang nergens op is aangesloten?
+\end{framed}
+
+\section*{Poorten samenstellen}
+
+In principe is de bovenstaande verzameling poorten redundant. Dat wil zeggen, je kunt alle poorten maken met een combinatie van andere poorten. Bijvoorbeeld, het schema hieronder heeft hetzelfde gedrag als een AND-poort:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/nand_inverter.png}
+\end{figure}
+
+We kunnen dit zien aan de hand van de waarheidstabel:
+
+\[
+\begin{array}{cc|c|c}
+x & y & P & Q \\
+\hline
+0 & 0 & 1 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 1.4}
+
+Je kunt een NAND-poort als inverter gebruiken. Maak een schakeling die dat doet. Gebruik een woordgever en een indicator om je schakeling te testen. Teken het schema op het antwoordformulier en maak een waarheidstabel om te verifiëren dat het klopt.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.5}
+
+Bouw het onderstaande schema na:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/opdracht1_5.png}
+\end{figure}
+
+Maak een waarheidstabel op je antwoordformulier. Met welke logische poort komt deze schakeling overeen?
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.6}
+
+Maak een schakeling die het gedrag van een NAND-poort met drie ingangen nabootst. Gebruik twee NAND-poorten met twee ingangen en een inverter. Gebruik een woordgever en een indicator om je schakeling te testen. Teken het schema op het antwoordformulier en maak een waarheidstabel om te verifiëren dat het klopt.
+
+\textit{Tip: je kunt een inverter en een NAND-poort gebruiken om een AND-poort te maken. Vervolgens kun je een AND-poort en een NAND-poort combineren tot een NAND-poort met drie ingangen.}
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.7}
+
+Bouw het onderstaande schema na:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/opdracht1_7.png}
+\end{figure}
+
+\textit{De verbindingen van de onderste inverter naar de bovenste twee NAND-poorten bevatten boogjes. Deze geven aan dat de betreffende verbinding een andere kruist zonder ermee verbonden te zijn:}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/boogjes.png}
+\end{figure}
+
+Maak een waarheidstabel op je antwoordformulier. Vereenvoudig daarna de schakeling. Dat wil zeggen: maak een schakeling die minder poorten gebruikt, maar hetzelfde doet. Teken het schema op je antwoordformulier.
+
+\textit{Voor deze schakeling heb je een NAND-poort met drie ingangen nodig. Er is geen PIDAC-module die zo'n poort heeft, maar je kunt hiervoor een NAND-poort met vier ingangen gebruiken.}
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdrachten 1.1 - 1.7 aftekenen.
+\end{framed}
+
+\section*{Boole-notatie}
+
+Het bouwen van simpele schakelingen kan vaak op basis van intuïtie en uitproberen. Maar bij complexere schakelingen werkt dat niet meer. Daarvoor gebruiken we Boole-algebra. Boole-algebra is in 1854 ontwikkeld door George Boole.
+
+\textit{Als je ervaring hebt met propositielogica, zal Boole-algebra je bekend voorkomen. Het is namelijk equivalent — alleen de notatie verschilt.}
+
+We duiken niet volledig in de algebra, maar we leren hoe je Boole-notatie kunt gebruiken om schakelschema's te beschrijven.
+
+Voor een OR-poort gebruiken we bijvoorbeeld het symbool $\textbf{+}$. Dus het volgende schema:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{./images/OR.png}
+\end{figure}
+
+Schrijven we als: $\textbf{Q = y + z}$
+
+Hieronder een overzicht van de notatie:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{3cm}|>{\vspace{4pt}\centering\arraybackslash}m{3cm}|}
+\hline
+Poort & Boole-notatie & Schema \\
+\hline
+OR & $Q = y + z$ & \includegraphics[width=0.15\textwidth]{./images/OR.png} \\ \hline
+AND & $Q = y \cdot z$ & \includegraphics[width=0.15\textwidth]{./images/AND.png} \\ \hline
+Inverter & $Q = \overline{y}$ & \includegraphics[width=0.15\textwidth]{./images/inverter.png} \\ \hline
+XOR & $Q = y \oplus z$ & \includegraphics[width=0.15\textwidth]{./images/XOR.png} \\ 
+\hline
+\end{tabular}
+\caption*{Boole-notatie voor logische poorten}
+\end{table}
+
+Let op: je hebt het symbool $\oplus$ strikt genomen niet nodig; je kunt XOR ook herschrijven met behulp van $\cdot$, $+$ en $\overline{\phantom{a}}$.
+
+\subsection*{Gebruik Boole-notatie}
+
+We kunnen ook NAND- en NOR-poorten beschrijven:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{3cm}|>{\vspace{4pt}\centering\arraybackslash}m{3cm}|}
+\hline
+Poort & Boole-notatie & Schema \\
+\hline
+NAND & $Q = \overline{y \cdot z}$ & \includegraphics[width=0.15\textwidth]{./images/NAND.png} \\ \hline
+NOR & $Q = \overline{y + z}$ & \includegraphics[width=0.15\textwidth]{./images/NOR.png} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{Complexe schakelingen}
+
+Een schakeling als deze:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/or_and.png}
+\end{figure}
+
+Schrijven we als: \( Q = x \cdot (y + z) \)
+
+Een andere schakeling:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{./images/nand_or.png}
+\end{figure}
+
+Wordt: \( Q = x + \overline{y \cdot z} \)
+
+Operatorvolgorde: $\overline{a}$ gaat voor $a \cdot b$, dat gaat weer voor $a + b$. Bij gelijke operatoren wordt van links naar rechts geëvalueerd.
+
+Voorbeeld: $a \cdot (b + c) \cdot e + f$
+
+\newpage
+\begin{framed}
+\textbf{Opdracht 1.8}
+
+Bekijk de expressie: \( Q = \overline{\overline{y} \cdot z} \)
+
+Teken het bijbehorende schema, bouw het na en maak een waarheidstabel.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.9}
+
+Bekijk de expressie: \( Q = \overline{(a \oplus b) \cdot c} \)
+
+Teken het bijbehorende schema, bouw het na en maak een waarheidstabel.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.10}
+
+Bekijk de expressie: \( Q = \overline{\overline{\overline{p}\cdot \overline{q}} \cdot \overline{p \cdot q}} \)
+
+Teken het bijbehorende schema, bouw het na en maak een waarheidstabel.
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdrachten 1.8 - 1.10 aftekenen.
+\end{framed}
+
+\section*{Boole-expressies evalueren}
+
+Je kunt aan de hand van Boole-expressies direct een waarheidstabel opstellen, zonder de schakeling eerst te bouwen. Voor eenvoudige expressies zoals $Q = y + z$, $Q = y \cdot z$ en $Q = \overline{y}$ kun je de waarheidstabellen van de poorten raadplegen (zie de cheatsheet).
+
+Voor complexere expressies vul je gewoon $1$ of $0$ in voor de variabelen en kijk je wat er uitkomt. Neem bijvoorbeeld $Q = \overline{y + z}$. Dit is de expressie van een NOR-poort.
+
+Wat gebeurt er als $y = 1$ en $z = 0$?
+\[
+Q = \overline{y + z} = \overline{1 + 0} = \overline{1} = 0
+\]
+
+Doe dit voor alle combinaties van $y$ en $z$:
+\[
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 1.11}
+
+We hebben een schakeling gegeven door:
+\[
+Q = \overline{v \cdot \overline{w}} \oplus p
+\]
+
+Beredeneer de waarheidstabel. Als je klaar bent, teken het schema, bouw het en controleer of je waarheidstabel klopt.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.12}
+
+De schakeling is gegeven door:
+\[
+Q = \overline{\overline{a} + b} + c
+\]
+
+Beredeneer de waarheidstabel voor deze schakeling.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 1.13}
+
+NAND-poorten hebben de handige eigenschap dat je er elke andere poort mee kunt bouwen. Ontwerp een schakeling van alleen NAND-poorten die zich gedraagt als een AND-poort. Teken het schema in je antwoordformulier.
+
+\textit{Tip: je kunt een NAND als inverter gebruiken door slechts één ingang te verbinden.}
+\end{framed}
+
+\newpage
+\begin{framed}
+\textbf{Opdracht 1.14}
+
+Een veelgebruikte schakeling is de dataselector (multiplexer). Stel je een systeem voor met twee datasignalen en een digitale selectielijn. Afhankelijk van de waarde van de selectielijn gaat het ene of het andere signaal door.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\textwidth]{./images/dataselector.png}
+\end{figure}
+
+Inputs: $D_0$, $D_1$, $S$ (select). Output: $Q$
+
+\[
+\begin{array}{ccc|c}
+S & D_0 & D_1 & Q \\
+\hline
+0 & d_0 & d_1 & d_0 \\
+1 & d_0 & d_1 & d_1
+\end{array}
+\]
+
+Volledig uitgewerkt:
+\[
+\begin{array}{ccc|c}
+S & D_0 & D_1 & Q \\
+\hline
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 0 \\
+1 & 1 & 1 & 1 \\
+\end{array}
+\]
+
+Ontwerp een schakeling voor deze tabel.
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdrachten 1.11 - 1.14 aftekenen.
+\end{framed}
+
+\newpage
+\section*{Opmerkingen}
+
+\subsection*{Relatie met programmeertalen}
+
+De Boole-logica lijkt op wat je tegenkomt in programmeertalen:
+\begin{itemize}
+    \item In plaats van $1$ en $0$ zie je vaak \verb|true| en \verb|false|
+    \item $a + b$ wordt \verb/a || b/ in C, of \verb|a or b| in Python
+    \item $a \cdot b$ wordt \verb|a && b| in C, of \verb|a and b| in Python
+    \item $\overline{a}$ wordt \verb|!a| in C, of \verb|not a| in Python
+\end{itemize}
+
+\subsection*{Relatie met propositielogica}
+
+Boole-algebra is gelijkwaardig aan propositielogica:
+\begin{itemize}
+    \item $1$ en $0$ komen overeen met $\top$ (waar) en $\bot$ (onwaar)
+    \item $a + b$ wordt $a \lor b$
+    \item $a \cdot b$ wordt $a \land b$
+    \item $\overline{a}$ wordt $\neg a$
+\end{itemize}
+
+
+\newpage
+\chapter*{Week 2}
+\newpage
+
+\section*{Boolealgebra: de kracht van abstractie}
+
+In deze sessie leer je hoe je Boole-algebra kunt gebruiken om schakelingen te ontwerpen. In de vorige sessie heb je geleerd wat het verband is tussen een Boole-expressie en een schakeling. De kracht van Boole-algebra is dat je ermee kunt rekenen: je kunt het gebruiken om systematisch schakelingen te ontwerpen en te vereenvoudigen.
+
+In het eerste deel van deze sessie introduceren we de rekenregels van de Boole-algebra. Daarna gebruiken we deze regels om schakelingen te ontwerpen.
+
+\subsection*{Herhaling}
+
+\begin{framed}
+\textbf{Opdracht 2.1}\\
+We hebben een schakeling gegeven door $Q = (a + \overline{a}) \cdot b$.\\
+Beredeneer de waarheidstabel voor deze schakeling. Teken het schema op je antwoordblad, bouw de schakeling en test of je waarheidstabel klopt.
+\end{framed}
+
+\section*{Schakelingen vereenvoudigen}
+
+De bovenstaande schakeling is onnodig ingewikkeld. We kunnen het eenvoudiger maken. Als je naar de waarheidstabel kijkt, zie je wellicht dat deze gelijk is aan $Q = b$. Dit kunnen we ook beredeneren:
+
+Beschouw het deel $a + \overline{a}$:
+\[
+\begin{array}{c|c}
+a & a + \overline{a} \\
+\hline
+0 & 1 \\
+1 & 1
+\end{array}
+\]
+
+Met andere woorden: $a + \overline{a} = 1$. Dus kunnen we de expressie $Q = (a+ \overline{a}) \cdot b$ vereenvoudigen naar $Q = 1 \cdot b$. En dat kunnen we weer verder vereenvoudigen:
+
+\[
+\begin{array}{c|c}
+b & 1 \cdot b \\
+\hline
+0 & 0 \\
+1 & 1
+\end{array}
+\]
+
+Hieruit volgt: $1 \cdot b = b$. We hebben dus geen logische poorten nodig; we kunnen de drukknop van de woordgever direct met de indicator verbinden.
+
+Samengevat:
+\[
+Q = (a + \overline{a}) \cdot b = 1 \cdot b = b
+\]
+
+We hebben hiermee twee fundamentele regels ontdekt:
+\[
+\begin{array}{rl}
+z + \overline{z} &= 1 \\
+1 \cdot z &= z
+\end{array}
+\]
+
+We kunnen heel veel meer van dit soort wetmatigheden vaststellen door schakelingen te bouwen en daar waarheidstabellen mee te maken. Hieronder volgen een aantal van deze wetmatigheden:
+
+\subsubsection*{Rekenregels voor variabelen}
+
+\[
+\begin{array}{rlrl}
+1. & z + z = z & 4. & z + \overline{z} = 1 \\
+2. & z \cdot z = z & 5. & z \cdot \overline{z} = 0 \\
+3. & \overline{\overline{z}} = z
+\end{array}
+\]
+
+\subsubsection*{Rekenregels voor constanten}
+
+\[
+\begin{array}{rlrlrl}
+6. & 0 + 0 = 0 & 10. & 0 \cdot 0 = 0 & 14. & \overline{0} = 1 \\
+7. & 0 + 1 = 1 & 11. & 0 \cdot 1 = 0 & 15. & \overline{1} = 0 \\
+8. & 1 + 0 = 1 & 12. & 1 \cdot 0 = 0 \\
+9. & 1 + 1 = 1 & 13. & 1 \cdot 1 = 1
+\end{array}
+\]
+
+\subsubsection*{Moduluswetten}
+
+\[
+\begin{array}{rlrl}
+16. & 0 + z = z & 18. & 0 \cdot z = 0 \\
+17. & 1 + z = 1 & 19. & 1 \cdot z = z
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.2}\\
+Verifieer aan de hand van een waarheidstabel dat de rekenregel $z \cdot \overline{z} = 0$ klopt.
+\end{framed}
+
+Je kan de bovenstaande regels gebruiken om, bijvoorbeeld de expressie $Q = p + \overline{\overline{0} \cdot \overline{p}}$ vereenvoudigen.
+
+\[
+\begin{array}{rcll}
+Q &=& p + \overline{\overline{0} \cdot \overline{p}} \\
+  &=& p + \overline{1 \cdot \overline{p}} & \text{(regel 14)} \\
+  &=& p + \overline{\overline{p}} & \text{(regel 19)} \\
+  &=& p + p & \text{(regel 3)} \\
+  &=& p & \text{(regel 1)}
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.3}\\
+Vereenvoudig de expressie $Q = \overline{a \cdot \overline{a}}$. Gebruik de bovenstaande wetten en schrijf alle stappen van je afleiding op. Vergelijk beide expressies met behulp van een waarheidstabel.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 2.4}\\
+Vereenvoudig de expressie $Q = a \cdot \overline{a \cdot \overline{\overline{a}}}$. Geef een volledige afleiding met verwijzing naar de gebruikte regels.
+\end{framed}
+
+
+
+
+\section*{Wetmatigheden uit de wiskunde}
+Er zijn een aantal wetmatigheden die overeenkomen met wat je in de wiskunde gewend bent.
+
+\subsubsection*{Associativiteit}
+Voor een herhaling van dezelfde operator maakt de volgorde waarin je ze toepast niet uit:
+\[
+\begin{array}{ll}
+20. & (x + y) + z = x + (y + z) \\
+21. & (x \cdot y) \cdot z = x \cdot (y \cdot z)
+\end{array}
+\]
+
+\subsubsection*{Commutativiteit}
+Je kunt de volgorde van de argumenten van de operatoren omdraaien:
+\[
+\begin{array}{ll}
+22. & y + z = z + y \\
+23. & y \cdot z = z \cdot y
+\end{array}
+\]
+
+\subsubsection*{Distributieve wetten}
+Voor $\cdot$ en $+$ zijn de volgende distributieregels van toepassing:
+\[
+\begin{array}{ll}
+24. & x \cdot (y + z) = x \cdot y + x \cdot z \\
+25. & x + y \cdot z = (x + y) \cdot (x + z)
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.5}\\
+Laat met waarheidstabellen zien dat distributieve wet 25 correct is.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 2.6}\\
+De expressie $Q = c + (a \cdot b + 0) \cdot \overline{a}$ is equivalent aan $Q = c$.\\
+Geef de afleiding die laat zien dat dit correct is. Schrijf alle stappen van je afleiding op en geef aan welke regels je gebruikt. Gebruik alleen de volgende wetmatigheden:
+$$
+\begin{array}{rl}
+\text{Regel 5:} &\quad z \cdot \overline{z} = 0 \\
+\text{Regel 16:} &\quad 0 + z = z \\
+\text{Regel 18:} &\quad 0 \cdot z = 0 \\
+\text{Regel 21:} &\quad (x \cdot y) \cdot z = x \cdot (y \cdot z) \\
+\text{Regel 22:} &\quad y + z = z + y \\
+\text{Regel 23:} &\quad y \cdot z = z \cdot y
+\end{array}
+$$
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdracht 2.1 - 2.6 aftekenen.
+\end{framed}
+
+\newpage
+
+\section*{Absorptie en De Morgan}
+Nog een laatste serie van wetmatigheden.
+
+\subsubsection*{Absorptiewetten}
+De onderstaande wetten geven handige shortcuts bij het vereenvoudigen van complexe Boole-expressies:
+\[
+\begin{array}{ll}
+26. & z + y \cdot z = z \\
+27. & z \cdot (y + z) = z \\
+28. & y + \overline{y} \cdot z = y + z \\
+29. & y \cdot (\overline{y} + z) = y \cdot z
+\end{array}
+\]
+
+\subsubsection*{De Morganwetten}
+De wetten van De Morgan beschrijven de relatie tussen de drie operatoren:
+\[
+\begin{array}{ll}
+30. & \overline{y + z} = \overline{y} \cdot \overline{z} \\
+31. & \overline{y \cdot z} = \overline{y} + \overline{z} \\
+32. & y + z = \overline{\overline{y} \cdot \overline{z}} \\
+33. & y \cdot z = \overline{\overline{y} + \overline{z}}
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.7}\\
+Laat met waarheidstabellen zien dat regel 30 correct is.
+\end{framed}
+
+De hoeveelheid wetten lijkt misschien wat veel, maar de wetten zijn zeer redundant. Dat wel zeggen dat je de meeste wetten uit de andere wetten kan afleiden. Bijvoorbeeld,  regel 28 ($y + \overline{y} \cdot z = y + z$) kan je als volgt afleiden:
+\[
+\begin{array}{rll}
+y + \overline{y} \cdot z &= (y + \overline{y}) \cdot (y + z) &\text{(regel 25)} \\
+                           &= 1 \cdot (y + z) &\text{(regel 4)} \\
+                           &= y + z &\text{(regel 19)}
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.8}\\
+De regels 32 en 33 (De Morgan) zijn redundant. Laat zien dat je regel 32 kunt afleiden met behulp van regel 30 en regel 3.
+\end{framed}
+
+\section*{Waarheidstabellen en expressies ontwerpen}
+
+Dat was een vrij theoretisch uitstapje, maar we gaan nu eindelijk zien hoe we deze inzichten kunnen gebruiken voor het ontwerpen van schakelingen. De truc die je gaat leren is hoe je Boole-algebra kunt gebruiken om op een systematische manier waarheidstabellen om te zetten in schakelingen.
+
+Neem de volgende expressie met twee variabelen:
+\[
+Q = \overline{y} \cdot \overline{z} + \overline{y} \cdot z + y \cdot \overline{z} + y \cdot z
+\]
+
+Deze uitdrukking is altijd waar. Ze bestaat uit vier losse disjuncten (delen gescheiden door $+$): $\overline{y} \cdot \overline{z}$, $\overline{y} \cdot z$, $y \cdot \overline{z}$ en $y \cdot z$. Voor elke combinatie van $y$ en $z$ is precies één disjunct gelijk aan 1 en de rest aan 0. Bijvoorbeeld: als $y = 0$ en $z = 1$, dan is $\overline{y} \cdot z = 1$, en de rest 0. Omdat het een OR-expressie is, is $Q = 1$.
+
+Stel dat we willen dat $Q$ altijd de waarde 1 heeft, behalve als $y = 1$ en $z = 0$. We schrappen dan gewoon de bijbehorende disjunct:
+\[
+Q = \overline{y} \cdot \overline{z} + \overline{y} \cdot z + y \cdot z
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.9}\
+Maak een waarheidstabel en ga na dat de bovenstaande expressie altijd waar is, behalve als $y = 1$ en $z = 0$.
+\end{framed}
+
+We kunnen dus voor elke invulling van $y$ en $z$ een expressie formuleren die alleen waar is voor die specifieke combinatie. Hiermee kunnen we expressies opstellen op basis van waarheidstabellen.
+
+Stel dat we de volgende waarheidstabel willen implementeren:
+\[
+\begin{array}{cc|c}
+y & z & Q \\
+\hline
+0 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0
+\end{array}
+\]
+
+De rijen waarvoor $Q = 1$ zijn:
+\begin{itemize}
+  \item $\overline{y} \cdot \overline{z}$
+  \item $\overline{y} \cdot z$
+  \item $y \cdot \overline{z}$
+\end{itemize}
+
+Samen geeft dit:
+\[
+Q = \overline{y} \cdot \overline{z} + \overline{y} \cdot z + y \cdot \overline{z}
+\]
+
+We kunnen dit vereenvoudigen:
+\[
+\begin{array}{rl}
+Q &= \overline{y} \cdot (\overline{z} + z) + \overline{z} \cdot y \\
+  &= \overline{y} \cdot 1 + \overline{z} \cdot 1 \\
+  &= \overline{y} + \overline{z} \\
+  &= \overline{y \cdot z} \quad \text{(regel 31)}
+\end{array}
+\]
+
+Met andere woorden: deze waarheidstabel komt overeen met een enkele NAND-poort.
+
+Voor schakelingen met meer dan twee inputs wordt het moeilijker om dit intuïtief te doen. Neem bijvoorbeeld de dataschakelaar (multiplexer):
+
+\[
+\begin{array}{ccc|c}
+D_0 & D_1 & S & Q \\
+\hline
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 1
+\end{array}
+\]
+
+De disjuncten met $Q = 1$ zijn:
+\begin{itemize}
+  \item $\overline{D_0} \cdot D_1 \cdot S$
+  \item $D_0 \cdot \overline{D_1} \cdot \overline{S}$
+  \item $D_0 \cdot D_1 \cdot \overline{S}$
+  \item $D_0 \cdot D_1 \cdot S$
+\end{itemize}
+
+Samen vormen ze:
+\[
+Q = \overline{D_0} \cdot D_1 \cdot S + D_0 \cdot \overline{D_1} \cdot \overline{S} + D_0 \cdot D_1 \cdot \overline{S} + D_0 \cdot D_1 \cdot S
+\]
+
+Vereenvoudiging:
+\[
+\begin{array}{rl}
+Q &= S \cdot D_1 \cdot \overline{D_0} + S \cdot D_1 \cdot D_0 + \overline{S} \cdot D_0 \cdot \overline{D_1} + \overline{S} \cdot D_0 \cdot D_1 \\
+  &= S \cdot (D_1 \cdot \overline{D_0} + D_1 \cdot D_0) + \overline{S} \cdot (D_0 \cdot \overline{D_1} + D_0 \cdot D_1) \\
+  &= S \cdot (D_1 \cdot (\overline{D_0} + D_0)) + \overline{S} \cdot (D_0 \cdot (\overline{D_1} + D_1)) \\
+  &= S \cdot D_1 + \overline{S} \cdot D_0
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.10}\
+Schrijf de expressie van de dataschakelaar om zodat je een uitdrukking overhoudt die je met alleen NAND-poorten kunt maken. Laat de afleiding op het antwoordblad zien.\\
+\textbf{Bouw de dataschakelaar} en teken het schema op je antwoordblad.
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdracht 2.7 - 2.10 aftekenen.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 2.11}\
+Bekijk de volgende waarheidstabel:
+\[
+\begin{array}{ccc|c}
+p & q & r & Q \\
+\hline
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 0 \\
+1 & 1 & 1 & 1
+\end{array}
+\]
+Maak een schakeling voor deze waarheidstabel. De eenvoudigste oplossing gebruikt twee inverters en één OR-poort. Omdat PIDAC geen OR-poorten heeft, moet je de expressie herschrijven met drie inverters en twee NAND-poorten. Geef de afleiding en het schema op je antwoordblad.
+\end{framed}
+
+\section*{Meerdere outputs}
+
+Tot nu toe hebben we alleen schakelingen met één output gezien. Wat als we een schakeling willen maken met meerdere outputs? De makkelijkste manier is om voor elke output een aparte schakeling te ontwerpen.
+
+Neem bijvoorbeeld een schakeling die twee 1-bits binaire getallen optelt: een \textit{half adder}. De mogelijke berekeningen zijn:
+\[
+\begin{array}{cc|cc}
+a & b & \,\text{Carry} & \,\text{Sum} \\ \hline
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 1 & 1 & 0
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 2.12}\
+Ontwerp een schakeling voor de \textit{half adder}.\\
+\begin{itemize}
+  \item Maak twee waarheidstabellen: één voor de linkerbit (carry), één voor de rechterbit (sum).
+  \item Stel Boole-expressies op voor beide outputs.
+  \item Vereenvoudig indien nodig de expressies. (Houd er rekening mee dat je alleen XOR-poorten en NAND-poorten te beschikking hebt.)
+  \item Bouw de schakeling.
+\end{itemize}
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdracht 2.11 en 2.12 aftekenen.
+\end{framed}
+
+
+\newpage\newpage
+
+\chapter*{Week 3}
+
+\newpage
+
+\section*{Rekenen met logica}
+
+\section*{Half Adder}
+
+Vorige week ben je geëindigd met een \textit{half adder}, een schakeling waarmee je twee 1-bits getallen kunt optellen.
+
+De vier mogelijke berekeningen met deze rekenmachine zijn:
+\[
+0 + 0 = 00, \quad 0 + 1 = 01, \quad 1 + 0 = 01, \quad 1 + 1 = 10
+\]
+
+De gecombineerde waarheidstabel voor de linkerbit (LB) en rechterbit (RB) is:
+\[
+\begin{array}{cc|cc}
+i_1 & i_2 & LB & RB \\
+\hline
+0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1\\
+1 & 0 & 0 & 1\\
+1 & 1 & 1 & 0
+\end{array}
+\]
+
+Voor LB:
+\[
+\begin{array}{cc|cl}
+i_1 & i_2 & LB \\
+\hline
+0 & 0 & 0&\\
+0 & 1 & 0&\\
+1 & 0 & 0&\\
+1 & 1 & 1& i_1 \cdot i_2
+\end{array}\]
+
+Voor RB:
+\[
+\begin{array}{cc|cl}
+i_1 & i_2 & RB \\
+\hline
+0 & 0 & 0&\\
+0 & 1 & 1&\overline{i_1}\cdot i_2\\
+1 & 0 & 1&i_1\cdot\overline{i_2}\\
+1 & 1 & 0&
+\end{array}\\
+\]
+
+Dit geeft de volgende expressies:
+$$
+\begin{array}{rcl}
+LB &=& i_1\cdot i_2 \\
+RB &=& \overline{i_1}\cdot i_2 + i_1\cdot\overline{i_2}
+\end{array}
+$$
+
+De expressie voor RB kan ook worden geschreven als:
+\[
+RB = i_1 \oplus i_2
+\]
+
+\begin{center}
+\includegraphics[width=0.5\linewidth]{./images/half_adder.png}
+\end{center}
+
+Aangezien PIDAC geen AND-poort heeft, lossen we dit anders op:
+\begin{center}
+\includegraphics[width=0.5\linewidth]{./images/half_adder2.png}
+\end{center}
+
+\section*{Full Adder}
+
+Een \textit{full adder} kan drie 1-bits getallen optellen. De output is een 2-bits getal.
+
+\begin{framed}
+\textbf{Opdracht 3.1}\\
+Vul de waarheidstabel voor de \textit{full adder} op het antwoordblad in.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 3.2}\\
+Ga na met de waarheidstabel dat:
+\[
+RB = i_1 \cdot \overline{i_2} \cdot \overline{i_3} + \overline{i_1} \cdot i_2 \cdot \overline{i_3} + \overline{i_1} \cdot \overline{i_2} \cdot i_3 + i_1 \cdot i_2 \cdot i_3
+\]
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 3.3}\\
+Bewijs met de waarheidstabel dat:
+\[
+RB = (i_1 \oplus i_2) \oplus i_3
+\]
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 3.4}\\
+Geef aan de hand van de waarheidstabel de (niet vereenvoudigde) expressie voor $LB$.
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 3.5}\\
+De expressie voor de linkerbit kan worden herschreven als:
+\[
+LB = \overline{\overline{i_1 \cdot i_2} \cdot \overline{(i_1 \oplus i_2) \cdot i_3}}
+\]
+Bouw een \textit{full adder} met twee XOR- en drie NAND-poorten. Label de poorten met $i_1$, $i_2$, $i_3$, $LB$ (Carry) en $RB$ (Sum).\\
+Teken het schema op je antwoordblad.
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdracht 3.1 - 3.5 aftekenen.
+\end{framed}
+
+\newpage
+\section*{Optelschakeling voor grotere getallen}
+
+Voor optelling van grotere getallen combineren we half en full adders.
+
+\begin{center}
+\includegraphics[width=0.3\linewidth]{./images/adders.png}
+\end{center}
+
+\begin{framed}
+\textbf{Opdracht 3.6}\\
+Vind twee of drie andere groepjes en maak gezamenlijk een 4-bits optelschakeling met \textit{full adders}.\\
+Zorg voor labeling van inputs, outputs en volgorde van de adders.\\
+Teken het schema op je antwoordblad.\\
+\textit{Let op: er kan overflow ontstaan. Zorg voor een vijfde output die overflow aangeeft.}
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdracht 3.6 aftekenen.
+\end{framed}
+
+\newpage
+\section*{Optel-/aftrekschakeling}
+
+We bouwen nu een schakeling die zowel kan optellen als aftrekken met behulp van two's complement.
+
+Bij two's complement wordt aftrekken gerealiseerd door bitflipping en het optellen van 1.
+
+De flip-waarheidstabel per bit:
+
+\[
+\begin{array}{cc|c}
+\textrm{SUB/}\overline{\textrm{ADD}} & \textrm{Input bit} & \textrm{Output bit} \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0
+\end{array}
+\]
+
+\begin{framed}
+\textbf{Opdracht 3.7}\\
+Met welke logische poort kun je deze waarheidstabel realiseren?
+\end{framed}
+
+\begin{framed}
+\textbf{Opdracht 3.8}\\
+Maak een 4-bits optel-/aftrekschakeling. De schakeling heeft 8 inputs en een $SUB/\overline{ADD}$-selectiebit.\\
+Als $SUB/\overline{ADD}$ = 0 wordt er opgeteld, als $SUB/\overline{ADD}$ = 1 wordt er afgetrokken.\\
+Teken het schema op je antwoordblad.\\
+\textit{Let op: overflow mag worden genegeerd.}
+\end{framed}
+
+\begin{framed}
+\textbf{Aftekenen!} Laat opdracht 3.7 en 3.8 aftekenen.
+\end{framed}
+
+\end{document}
